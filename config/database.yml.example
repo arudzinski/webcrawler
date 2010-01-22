@@ -1,0 +1,20 @@
+postgre_dev: &mysql_dev
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: web_crawler
+  pool: 5
+  username: root
+  password:
+
+development:
+    <<: *mysql_dev
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
+    <<: *mysql_dev
