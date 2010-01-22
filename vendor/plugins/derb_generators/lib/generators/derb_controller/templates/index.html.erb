@@ -1,0 +1,23 @@
+<column-mc:>
+<%%= will_paginate @<%= object_plural_name %> %>
+<table>
+  <thead>
+  <tr>
+    <%- model_name.constantize.columns.map(&:name).each do |column_name| -%>
+    <th><%= column_name.humanize -%></th>
+    <%- end -%>
+    <th colspan="3">Actions</th>
+  </tr>
+  </thead>
+  <tbody id="<%= object_plural_name %>_list">
+  <%%= render @<%= object_plural_name %> %>
+  </tbody>
+</table>
+<%%= will_paginate @<%= object_plural_name %> %>
+<% if actions.include?('new') %>
+<%% form_for <%= class_path.blank? ? "#{model_name}.new" : "[#{class_path.map{|a| ":#{a}"}*(', ')},  #{model_name}.new]" %> do |f| %>
+<%%= render :partial => 'form', :locals => {:f => f} %>
+<%%= f.submit 'Create <%= object_singular_name %>' %>
+<%% end %>
+<% end %>
+</column-mc:>

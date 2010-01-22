@@ -1,0 +1,16 @@
+<tr id="<%%= dom_id(<%= object_singular_name %>) %>">
+  <%- model_name.constantize.columns.map(&:name).each do |column_name| -%>
+      <%- if %w(created_at updated_at).include?(column_name) -%>
+         <td><%%= <%= object_singular_name %>.<%= column_name %>.strftime("%Y.%m.%d %H:%M") -%></td>
+      <%- else -%>
+         <td><%%= <%= object_singular_name %>.<%= column_name %> -%></td>
+      <%- end -%>
+  <%- end -%>
+<td><%%= link_to "Show", <%= namespace_prefix %><%= object_singular_name %>_path(<%= object_singular_name %>) %></td>
+<% if actions.include?('edit') %>
+<td><%%= link_to "Edit", edit_<%= namespace_prefix %><%= object_singular_name %>_path(<%= object_singular_name %>) %></td>
+<% end %>
+<% if actions.include?('destroy') %>
+<td><%%= link_to "Destroy", <%= namespace_prefix %><%= object_singular_name %>_path(<%= object_singular_name %>), :method => :delete, :confirm => "Are you sure?" %></td>
+<% end %>
+</tr>

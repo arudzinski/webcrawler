@@ -1,0 +1,2 @@
+ruby script/generate dryml_controller Post
+ruby script/generate dryml_model Comment commenter:string body:text post:references

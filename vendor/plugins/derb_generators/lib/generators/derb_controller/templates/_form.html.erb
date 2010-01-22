@@ -1,0 +1,5 @@
+<ul>
+  <%- model_name.constantize.columns.map{|c|[c,c.name]}.reject{|c| ["id","updated_at","created_at"].include?(c.last)}.each do |column,column_name| -%>
+  <li><%%= f.label :<%= column_name %> %><%%= f.<%=  DerbControllerGenerator.field_type(column.type) %> :<%= column_name %> %></li>
+  <%- end -%>
+</ul>

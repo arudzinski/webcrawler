@@ -1,0 +1,23 @@
+<column-mc:>
+<%= will_paginate @crawlers %>
+<table>
+  <thead>
+  <tr>
+
+    <th>Id</th>
+
+    <th>Name</th>
+
+    <th>Root domain</th>
+    <th>Start time</th>
+    <th>Finish time</th>
+    <th colspan="3">Actions</th>
+  </tr>
+  </thead>
+  <tbody id="crawlers_list">
+  <%= render @crawlers %>
+  </tbody>
+</table>
+<%= will_paginate @crawlers %>
+
+</column-mc:>

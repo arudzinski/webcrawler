@@ -1,0 +1,7 @@
+<column-mc:>
+    <%% form_for <%= class_path.blank? ? "@#{object_singular_name}" : "[#{class_path.map{|a| ":#{a}"}*(', ')}, @#{object_singular_name}]" %> do |f| %>
+    <%%= render :partial => 'form', :locals => {:f => f} %>
+    <%%= f.submit 'Update <%= object_singular_name %>' %>
+    <%% end %>
+    <%%= link_to 'Back', <%= namespace_prefix %><%= object_plural_name %>_path %>
+</column-mc:>

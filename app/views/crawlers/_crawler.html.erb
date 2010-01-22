@@ -1,0 +1,10 @@
+<tr id="<%= dom_id(crawler) %>">
+  <td><%= crawler.id -%></td>
+  <td><%= crawler.name -%></td>
+  <td><%= crawler.root_domain -%></td>
+  <td><%= crawler.start_time -%></td>
+  <td><%= crawler.finish_time -%></td>
+  <td><%= link_to "Show", crawler_path(crawler) %></td>
+  <td><%= link_to "Edit", edit_crawler_path(crawler) %></td>
+  <td><%= link_to "Destroy", crawler_path(crawler), :method => :delete, :confirm => "Are you sure?" %></td>
+</tr>

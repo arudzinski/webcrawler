@@ -1,0 +1,17 @@
+<column-mc:>
+<ul>
+
+    <li><label>Id</label><%= @crawler.id -%></li>
+
+    <li><label>Name</label><%= @crawler.name -%></li>
+
+    <li><label>Root domain</label><%= @crawler.root_domain -%></li>
+
+</ul>
+<%= link_to 'Edit', edit_crawler_path(@crawler) %> | 
+<%= link_to 'Back', crawlers_path %>
+</column-mc:>
+
+
+
+
