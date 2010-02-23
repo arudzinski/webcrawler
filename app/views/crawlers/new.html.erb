@@ -3,7 +3,11 @@
   <h1>New crawler</h1>
 
   <% semantic_form_for @crawler do |form| %>
-      <%= form.inputs %>
+      <% form.inputs do %>
+        <%= form.input :name %>
+          <%= form.input :root_domain %>
+        <% end %>
+
       <%= form.buttons %>
   <% end %>
 

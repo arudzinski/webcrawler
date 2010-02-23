@@ -3,11 +3,11 @@ class Page < ActiveRecord::Base
   # accessors
 
   # relations
-   belongs_to :crawler
+  belongs_to :crawler
 
 
-   has_many :page_links, :foreign_key => "source_page_id"
-   has_many :pages, :class_name => "Page", :through => :page_links,  :source => :target_page
+  has_many :page_links, :foreign_key => "source_page_id"
+  has_many :pages, :class_name => "Page", :through => :page_links,  :source => :target_page
 
 
   # callbacks
@@ -37,5 +37,10 @@ class Page < ActiveRecord::Base
   #-------------------------------------------------------------------
   #---------------------- { INSTANCE METHODS } -----------------------
   #-------------------------------------------------------------------
+
+  def domain
+    protocol, domain = address.split('//')
+    [protocol, domain.split('/').first].join('//')
+  end
 
 end
