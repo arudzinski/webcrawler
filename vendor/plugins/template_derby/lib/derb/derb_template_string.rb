@@ -73,7 +73,7 @@ class DerbTemplateString < String
   end
 
   def tag_attrs
-    unless (pairs = gsub(/(<|>)/, '').split(' ')[1..-1]).blank?
+    unless (pairs = gsub(/(<|>)/, '').scan(/[a-z]+=["'][^'"]+["']/i)).blank?
       ',' + pairs.map do |pair|
         key, val = pair.split('=');
         %{"#{key}" => #{val}}

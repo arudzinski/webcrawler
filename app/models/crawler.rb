@@ -1,6 +1,6 @@
 class Crawler < ActiveRecord::Base
   LINKS_LIMIT = 3
-  DEPTH_LIMIT = 3
+  DEPTH_LIMIT = 5
   TOTAL_LINKS = (DEPTH_LIMIT+1)*LINKS_LIMIT
 
 
@@ -11,8 +11,7 @@ class Crawler < ActiveRecord::Base
 
   # callbacks
 
-  # named_scopes
-
+  # named_scopes                                                                                                                                                              a
   # validations
   # validates_presence_of
   # validates_uniqueness_of
@@ -45,7 +44,10 @@ class Crawler < ActiveRecord::Base
   end
 
   def crawl
-    Delayed::Job.enqueue Crawl.new(id, root_page, 0, nil,
+
+    cs = CrawlingStack.new
+
+    Crawl.new(self.id, root_page, 0, cs, nil,
                                    :links_normalizer => {},
                                    :links_filter => {})
   end

@@ -9,8 +9,10 @@ class DerbCustomTag
 
   #========= Errors ===========
 
-  class InvalidTagsSourceFile < StandardError;end
-  class InvalidTagName < StandardError;end
+  class InvalidTagsSourceFile < StandardError;
+  end
+  class InvalidTagName < StandardError;
+  end
 
   #==============================
 
@@ -35,7 +37,7 @@ class DerbCustomTag
       end
 
       #We do reject method body, as it may contain some blank lines at the end of file...
-      raise InvalidTagsSourceFile, "Invalid tags source file (#{path}). " if !method_processing_buffer.reject{|k,v| k==:method_body}.blank?
+      raise InvalidTagsSourceFile, "Invalid tags source file (#{path}). " if !method_processing_buffer.reject{|k, v| k==:method_body}.blank?
     end
 
     def process_tag_definition(method_processing_buffer)
@@ -45,11 +47,20 @@ class DerbCustomTag
 
       attributes = method_processing_buffer[:method_def].match(ATTRS_REGEX).to_s.gsub(/(attrs=|")/, '').split(',')
 
-      block = eval <<-eos
-        Proc.new {|content, *attrs| %{#{(method_processing_buffer[:method_body]*"\n")}}.gsub("<content/>", content) }
-      eos
-     
-      @@all_tags.merge!(tagname => {:proc => block, :attrs => attributes})
+=begin
+      block = Proc.new do |content_hash, template, *attrs|
+        #sub known params
+        content_hash.each do |param_name, content_sub|
+          template.gsub!("<param:#{param_name.to_s}/>", content_sub)
+        end
+        #sub missing params
+        template.gsub!(/<param:[a-z]+\/>/i, "")
+
+        template
+      end
+=end
+
+      @@all_tags.merge!(tagname => {:attrs => attributes, :tag_template => (method_processing_buffer[:method_body]*"\n")})
     end
 
   end

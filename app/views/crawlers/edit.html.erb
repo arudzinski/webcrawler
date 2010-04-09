@@ -1,5 +1,6 @@
 <column-mc:>
-  <h1>Editing crawler</h1>
+
+  <frame header="Editing crawler">
   <% semantic_form_for @crawler do |form| %>
       <%= form.inputs %>
       <%= form.buttons %>
@@ -7,4 +8,6 @@
 
   <%= link_to 'Back', crawlers_path %>
   <%= link_to "Pages", crawler_pages_path(@crawler) %>
+  </frame>
+
 </column-mc:>

@@ -1,14 +1,15 @@
 <column-mc:>
 
-  <h1>New crawler</h1>
-
+  <frame id="new_crawler" header="New crawler">
   <% semantic_form_for @crawler do |form| %>
       <% form.inputs do %>
-        <%= form.input :name %>
+          <%= form.input :name %>
           <%= form.input :root_domain %>
-        <% end %>
+      <% end %>
 
       <%= form.buttons %>
   <% end %>
+  </frame>
+
 
 </column-mc:>

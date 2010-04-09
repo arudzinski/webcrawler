@@ -1,23 +1,14 @@
 <column-mc:>
 <%= will_paginate @crawlers %>
-<table>
-  <thead>
-  <tr>
+  <table class="generic" cellspacing="0" cellpadding="0">
+      <%= table_headers "Id", "Name", "Root domain", "Start time", "Finish time" %>
 
-    <th>Id</th>
-
-    <th>Name</th>
-
-    <th>Root domain</th>
-    <th>Start time</th>
-    <th>Finish time</th>
-    <th colspan="3">Actions</th>
-  </tr>
-  </thead>
-  <tbody id="crawlers_list">
-  <%= render @crawlers %>
-  </tbody>
-</table>
+      <tbody id="crawlers_list">
+      <%= render @crawlers %>
+      </tbody>
+    </table>
 <%= will_paginate @crawlers %>
+
+  <%= link_to "New crawler", new_crawler_path %>
 
 </column-mc:>

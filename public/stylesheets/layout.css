@@ -1,29 +1,652 @@
-/* layout.css - all layout styles without content part */
+body
+{
+    background: url(/images/bg_body.gif) repeat-x top left #f2f2f2;
+    font: 13px 'Trebuchet MS', Helvetica, Tahoma, Verdana;
+    overflow-y: scroll;
+}
 
-body {
+.all
+{
     width: 1000px;
-    margin: auto;
+    margin: 0px auto;
+}
+
+
+.formtastic .error
+{
+background: #FF6464;
+}
+
+
+h1
+{
+    font-size: 36px;
+    text-shadow: 1px 1px 0px #fff;
+    float: left;
+    height: 50px;
+    margin-bottom: -26px;
+    padding-left: 40px;
+    position: relative;
+    z-index: 5;
+}
+
+.frame h1
+{
+    float: none;
+    height: auto;
+    margin-bottom: -26px;
+}
+
+/* ------- main-menu -------- */
+
+.main_menu
+{
+    padding: 37px 24px 0px;
+    height: 110px;
+}
+
+.main_menu li
+{
+    display: block;
+    float: right;
+    width: 132px;
+    height: 38px;    
+    margin-left: -8px;
+}
+
+.main_menu li a
+{
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #6b6b6b;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+    background: url(/images/tabs_bg.png) no-repeat top left;
+    width: 132px;
+    height: 38px;
+    display: block;
+    line-height: 37px;
+    z-index:5;
+    position: absolute;
+}
+
+.main_menu li a:hover
+{
+    color: #535252;
+}
+
+.main_menu li.highlighted a
+{
+    background: url(/images/tabs_bg_hover.png) no-repeat top left;
+    width: 185px;
+    height: 51px;
+    font-size: 16px;
+    color: #838282;
+    line-height: 41px;
+    margin-top: -8px;
+    margin-left: -27px;
+    z-index: 10;
+}
+
+
+/* ------- frame -------- */
+
+.frame
+{
+    clear: both;
+    top: -5px;
+}
+
+.frame .header
+{
+    height: 50px;
+    background: url(/images/frm_hmc.gif) repeat-x top left;    
+}
+.frame .header .lc, .frame .header .rc
+{
+    position: absolute;
+    width: 45px;
+    height: 50px;
+    top: 0px;
+}
+
+.frame .header .lc
+{
+    background: url(/images/frm_hlc.gif) no-repeat top left;
+    left: 0px;
+}
+
+.frame .header .rc
+{
+    background: url(/images/frm_hrc.gif) no-repeat top left;
+    right: 0px;
+}
+
+.frame .content
+{
+    background: url(/images/frm_cl.gif) repeat-y top left #fff;
+}
+.frame .content .c
+{
+    background: url(/images/frm_cr.gif) repeat-y top right;
+    padding: 0px 26px 0px;
+}
+
+.frame .footer
+{
+    clear: both;
+    height: 40px;
+    background: url(/images/frm_fm.gif) repeat-x bottom center;
+}
+
+.frame .footer .lc, .frame .footer .rc
+{
+    position: absolute;
+    width: 45px;
+    height: 40px;
+    top: 0px; 
+}
+
+.frame .footer .lc
+{
+    left: 0px;
+    background: url(/images/frm_fl.gif) no-repeat bottom left;
+}
+
+.frame .footer .rc
+{
+    right: 0px;
+    background: url(/images/frm_fr.gif) no-repeat bottom left;       
+}
+
+
+.frame .content .c fieldset.inputs
+{
+    padding: 0px 20px 20px;
+}
+
+/* ------- end frame -------- */
+
+/* ------- actions menu -------- */
+
+ul.actions 
+{
+    float: right;
+    padding-right: 30px;
+    height: 50px;
+    position: relative;
+    z-index: 5;
+    margin-bottom: -26px;    
+}
+
+ul.actions li
+{
+    display: block;
+    float: right;
+    padding-left: 5px;
+}
+ul.actions li a
+{
+    width:39px;
+    height: 50px;
+    display: block;
+    font-size: 0;
+    color: #f2f2f2;
+}
+
+ul.actions li a.add
+{
+    background: url(/images/actions_add.png) no-repeat top left;
+}
+
+ul.actions li a.settings
+{
+    background: url(/images/actions_settings.png) no-repeat top left;
+}
+
+
+/* ------ table frm ------- */
+
+
+.generic
+{
+    width: 100%;
+    clear: both;
+}
+
+.generic thead .lc, .frgenericm thead .rc
+{
+    width: 45px;
+    height: 66px;
+}
+
+.generic thead th
+{
+    color: #fff;
+    font-size: 14px;
+    padding: 20px 4px 0px;
+    text-align: left;
+    background: url(/images/frm_hm.png) repeat-x bottom center;    
+}
+
+.generic thead .lc
+{
+    background: url(/images/frm_hl.png) no-repeat top left;
     padding: 0px;
-    font-family: Trebuchet MS, Tahoma;
-    font-size: 11px;
 }
 
-/* ------ [ MESSAGE BLOCK ] ------ */
-
-div#message_block ul
+.generic thead .rc
 {
-    display:block;
-    border: 2px solid #3F4447;
-    padding: 2px;
-    text-indent: 10px;
+    background: url(/images/frm_hr.png) no-repeat top left;
+    border:none;
+    padding: 0px;    
 }
 
-div#message_block ul.notice
+.generic thead a
 {
-    background:#CEFF7F;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px dotted #757575;
 }
 
-div#message_block ul.error
+.generic tbody td
 {
-    background: #FFD86F;
+    background: url(/images/frm_dot.gif) repeat-x bottom center;
 }
+
+
+.generic tbody .lb
+{
+    background: url(/images/frm_cl.png) repeat-y top left;
+    border: none;
+}
+
+.generic tbody .rb
+{
+    background: url(/images/frm_cr.png) repeat-y top right;
+    border: none;
+    padding: 2px 9px;
+    vertical-align: top;
+}
+.generic tbody td
+{
+    background-color: #fff;
+    padding: 9px 4px;
+    font-size: 12px;
+}
+
+.generic tfoot td
+{
+    height: 50px;
+    background: url(/images/frm_fm.png) repeat-x top center;
+}
+
+.generic tfoot .lc, .generic tfoot .rc
+{
+    width: 45px;
+}
+
+.generic tfoot .lc
+{
+    background: url(/images/frm_fl.png) no-repeat top left;
+}
+
+.generic tfoot .rc
+{
+    right: 0px;
+    background: url(/images/frm_fr.png) no-repeat top left;
+}
+
+.generic tbody .rb div
+{
+    height: 31px;
+    background: url(/images/frm_actions.png) no-repeat top left;
+    position: absolute;
+    display: none;
+    padding: 7px 8px 0px 20px;
+    white-space:nowrap;
+}
+.generic tbody .rb div a
+{
+   z-index: 10;
+   position: relative;
+}
+.generic tbody .rb div span
+{
+    height: 31px;
+    width: 15px;
+    position: absolute;
+    background: url(/images/frm_actions.png) no-repeat top right #f2f2f2;
+    right: 0;
+    top: 0;
+    z-index: 5;
+}
+
+
+
+/* ------ forms ------- */
+
+.inputs
+{
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.separated
+{
+    background: url(/images/dash.gif) repeat-x 0px 40px #f5f5f5;
+    margin: 0px 20px;
+    -moz-border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.separated legend span
+{
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    left: 0px;
+}
+
+.separated ol
+{
+    padding: 50px 0px 8px;
+}
+
+
+
+
+.inputs ol li
+{
+    display: block;
+    padding-bottom: 5px;
+    clear: both;
+}
+.inputs ol li label
+{
+    font-size: 13px;
+    display: block;
+    float: left;
+    width: 160px;
+    padding-top:6px;
+}
+
+.inputs ol li input, .inputs ol li textarea  
+{
+    width: 280px;
+}
+.inputs ol li textarea
+{
+    height: 150px;
+}
+
+.inputs ol li.boolean
+{
+    height: 35px;
+}
+
+.inputs ol li.boolean input
+{
+    width: auto;
+    position: absolute;
+    left: 162px;
+    margin-top: 2px;
+    outline: 0;
+}
+
+.inputs ol li.with_bt
+{
+    display: inline;
+}
+
+.inputs ol li.input_bt
+{
+    display: inline;
+}
+.inputs ol li.input_bt a, .inputs ol li .ui-datepicker-trigger
+{
+    position: absolute;
+    margin: 4px 0px 0px -26px;
+    cursor: pointer;
+}
+
+.inputs ol li span
+{
+    padding-top:6px;
+    float: left;
+}
+
+
+/* ----------- form buttons -------------- */
+
+ol li.commit
+{
+    text-align: right;
+    padding-top: 10px;
+    padding-right: 12px;
+}
+ol li.commit input
+{
+    border: 0;
+    font-size: 0;
+    padding: 0px;
+    width: 100px;
+    height: 35px;
+    cursor: pointer;
+    color: #fff;
+}
+
+ol li.commit .create
+{
+    background: url(/images/btns/create.png) no-repeat center center;
+}
+
+ol li.commit .update
+{
+    background: url(/images/btns/save.png) no-repeat center center;
+}
+
+ol li.commit .append
+{
+    background:  url(/images/btns/append.png) no-repeat center center !important; 
+}
+
+
+
+
+
+
+/* ----------- fieldsets -------------- */
+
+fieldset.buttons
+{
+    background: url(/images/dash.gif) repeat-x top left;
+    margin-top: 8px;
+}
+
+
+input, textarea, select
+{
+    /*
+    -moz-border-radius: 3px;
+    border: 1px solid #d1d0d0;
+    padding: 5px 6px;
+    background: url(/images/inputs/field.png) no-repeat top left #fbfbfb;
+    */
+
+    border: 1px solid #dce0e3;
+    border-top-color: #aaaeb2;
+    padding: 5px 6px;
+    -moz-border-radius: 3px;
+}
+input:focus, textarea:focus
+{
+    border-color: #bdd5ee;
+    border-top-color: #3f78b2;
+}
+
+select
+{
+    padding: 3px 2px 3px 2px;
+}
+
+
+.bt_close
+{
+    position: absolute;
+    top: -13px;
+    right: 38px;
+}
+
+/* --------- statuses -------- */
+
+#new, #filter
+{
+    display: none;
+}
+
+
+
+a, input
+{
+    outline: 0;
+}
+
+
+/* --------- reports table -------- */
+
+table.report
+{
+width:100%;
+font-size: 10px;
+}
+
+table.report input
+{
+border: 0px solid white;
+-moz-border-radius: 0px;
+padding: 1px;
+width: 35px;
+}
+
+table.report th
+{
+color:white;
+background:black;
+text-align:right;
+padding: 1px;
+}
+
+table.report th a
+{
+color:white;
+}
+
+table.report thead th
+{
+text-align:center;
+}
+
+table.report tbody td
+{
+text-align:center;
+}
+
+table.report th.resource_column
+{
+width: 40px;
+}
+
+table.report th.ehlc_column
+{
+width: 60px;
+}
+
+table.report th.lc_column
+{
+width:37px;
+}
+
+table.report th.total_hours_column
+{
+width:30px;
+}
+
+/* --------- reports table colours -------- */
+
+tr.hlc td,
+tr.hlc th,
+tr.total_hours_spent td,
+tr.total_hours_spent th
+{
+border-top:3px solid black;
+}
+
+table.report tbody th
+{
+background:darkgrey;
+}
+
+table.report tr.row_odd td
+{
+background: #F5F5F5;
+}
+
+table.report tbody tr:hover td,
+table.report tbody tr:hover th
+{
+background:orangered;
+color:white;
+}
+
+table.report tbody tr.total_hours_spent th,
+table.report tbody tr.total_cost th,
+table.report tbody tr.hlc th
+{
+background:peru;
+}
+
+table.report tbody tr.total_hours_spent td,
+table.report tbody tr.total_cost td,
+table.report tbody tr.hlc td
+{
+background:navajowhite;
+}
+
+table.report tbody tr.revenue th,
+table.report tbody tr.profit_margin th,
+table.report tbody tr.ehr th,
+table.report tbody tr.rhpm th
+{
+background:#8FBB2D;
+}
+
+
+table.report tbody tr.revenue td,
+table.report tbody tr.profit_margin td,
+table.report tbody tr.ehr td,
+table.report tbody tr.rhpm td
+{
+background:#B6EF3A;
+}
+
+table.report tbody tr.cash_flow th,
+table.report tbody tr.cf_profit_margin th,
+table.report tbody tr.ecfr th,
+table.report tbody tr.cfhpm th
+{
+background:cadetblue;
+}
+
+
+table.report tbody tr.cash_flow td,
+table.report tbody tr.cf_profit_margin td,
+table.report tbody tr.ecfr td,
+table.report tbody tr.cfhpm td
+{
+background:paleturquoise;
+}
+
+
+

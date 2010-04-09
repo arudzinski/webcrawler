@@ -2,11 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-  <title>Your apllication name</title>
-  <%= stylesheet_link_tag 'scaffold' %>
+  <title>WebCrawler</title>
+  <%= stylesheet_link_tag "template", "layout" %>
+  <%= javascript_include_tag :defaults, :cache => true %>
+  <head:/>
 </head>
-    <body>
-        <p style="color: green"><%= flash[:notice] %></p>
-        <lbuilder_layout/>
-    </body>
+<body>
+    <div class="all" id="all">
+      <%= render :partial => "/layouts/main_menu" %>
+      <%= flash[:notice] %>
+      <%= flash[:error] %>
+      <menu:/>
+      <lbuilder_layout/>
+    </div>
+    <div id="osx-modal-content" style="display:none"><div id="osx-modal-title">Title</div><div id="osx-modal-data"></div></div>
+    <%= javascript_include_tag 'jquery.simplemodal.js', 'osx.js', 'jquery-ui-1.7.2.custom.min' %>
+</body>
 </html>

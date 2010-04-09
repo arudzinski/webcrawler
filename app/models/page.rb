@@ -40,7 +40,7 @@ class Page < ActiveRecord::Base
 
   def domain
     protocol, domain = address.split('//')
-    [protocol, domain.split('/').first].join('//')
+    [protocol, domain.split('/')[0..-2].join('/')].join('//')
   end
 
 end
