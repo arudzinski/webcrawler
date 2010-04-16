@@ -1,26 +1,19 @@
 <column-mc:>
-<%= will_paginate @pages %>
-<table>
-  <thead>
-  <tr>
 
-    <th>Id</th>
+  <h1>Pages</h1>
+  <%= will_paginate @pages %>
+  <table class="generic" cellspacing="0" cellpadding="0">
+    <%= table_headers "Id", "Address", "Title", "Number of links", "Crawler", " " %>
+    <tbody id="pages_list">
+    <%= render @pages %>
+    </tbody>
+  </table>
+  <%= will_paginate @pages %>
 
-    <th>Address</th>
 
-    <th>Title</th>
 
-    <th>Number of links</th>
+  
 
-    <th>Crawler</th>
 
-    <th colspan="3">Actions</th>
-  </tr>
-  </thead>
-  <tbody id="pages_list">
-  <%= render @pages %>
-  </tbody>
-</table>
-<%= will_paginate @pages %>
 
 </column-mc:>

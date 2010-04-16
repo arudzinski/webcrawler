@@ -1,15 +1,53 @@
 <column-mc:>
-<ul>
+
+  <frame header="Crawler details">
+  <ul>
+
 
     <li><label>Id</label><%= @crawler.id -%></li>
-
     <li><label>Name</label><%= @crawler.name -%></li>
-
     <li><label>Root domain</label><%= @crawler.root_domain -%></li>
 
-</ul>
-<%= link_to 'Edit', edit_crawler_path(@crawler) %> | 
-<%= link_to 'Back', crawlers_path %>
+  </ul>
+  <%= link_to 'Edit', edit_crawler_path(@crawler) %> |
+  <%= link_to 'Back', crawlers_path %>
+
+  </frame>
+
+  <% if @relation_matrix_hash %>
+      <% @pages = @relation_matrix_hash.keys %>
+      <frame header="Relation Matrix">
+      <table class="relation_matrix" cellspacing="0" cellpadding="0">
+        <tr>
+          <th>\</th>
+          <% @pages.each do |page| %>
+              <th colspan="2"><%= page.title %></th>
+          <% end %>
+
+        </tr>
+        <% @relation_matrix_hash.each do |page, page_references| %>
+            <tr>
+              <th><%= page.title %></th>
+              <% @pages.each do |relative_page| %>
+                  <% if stats = page_references[relative_page.id] %>
+                      <% if !stats[:self_references].zero? and relative_page.id==page.id%>
+                          <td colspan="2"><%= stats[:self_references] %></td>
+                      <% else %>
+                          <td>&uarr;<%= stats[:incoming_links] %></td>
+                          <td>&larr;<%= stats[:outgoing_links] %></td>
+                      <% end %>
+
+                  <% else %>
+                      <td colspan="2"></td>
+                  <% end %>
+              <% end %>
+            </tr>
+        <% end %>
+      </table>
+      </frame>
+  <% end %>
+
+
 </column-mc:>
 
 

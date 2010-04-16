@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pages
 
   map.resources :crawlers do |crawlers|
+    crawlers.resource :crawl, :only => [:new]
     crawlers.resources :pages
   end
 

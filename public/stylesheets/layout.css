@@ -513,140 +513,21 @@ a, input
     outline: 0;
 }
 
-
-/* --------- reports table -------- */
-
-table.report
+.relation_matrix
 {
-width:100%;
-font-size: 10px;
+width: 100%;
 }
 
-table.report input
+.relation_matrix th
 {
-border: 0px solid white;
--moz-border-radius: 0px;
-padding: 1px;
-width: 35px;
-}
-
-table.report th
-{
-color:white;
 background:black;
-text-align:right;
-padding: 1px;
-}
-
-table.report th a
-{
 color:white;
 }
 
-table.report thead th
+.relation_matrix td
 {
-text-align:center;
+border-right: 1px solid black;
+border-bottom: 1px solid black;
+text-align: center;
+padding: 2px 10px;
 }
-
-table.report tbody td
-{
-text-align:center;
-}
-
-table.report th.resource_column
-{
-width: 40px;
-}
-
-table.report th.ehlc_column
-{
-width: 60px;
-}
-
-table.report th.lc_column
-{
-width:37px;
-}
-
-table.report th.total_hours_column
-{
-width:30px;
-}
-
-/* --------- reports table colours -------- */
-
-tr.hlc td,
-tr.hlc th,
-tr.total_hours_spent td,
-tr.total_hours_spent th
-{
-border-top:3px solid black;
-}
-
-table.report tbody th
-{
-background:darkgrey;
-}
-
-table.report tr.row_odd td
-{
-background: #F5F5F5;
-}
-
-table.report tbody tr:hover td,
-table.report tbody tr:hover th
-{
-background:orangered;
-color:white;
-}
-
-table.report tbody tr.total_hours_spent th,
-table.report tbody tr.total_cost th,
-table.report tbody tr.hlc th
-{
-background:peru;
-}
-
-table.report tbody tr.total_hours_spent td,
-table.report tbody tr.total_cost td,
-table.report tbody tr.hlc td
-{
-background:navajowhite;
-}
-
-table.report tbody tr.revenue th,
-table.report tbody tr.profit_margin th,
-table.report tbody tr.ehr th,
-table.report tbody tr.rhpm th
-{
-background:#8FBB2D;
-}
-
-
-table.report tbody tr.revenue td,
-table.report tbody tr.profit_margin td,
-table.report tbody tr.ehr td,
-table.report tbody tr.rhpm td
-{
-background:#B6EF3A;
-}
-
-table.report tbody tr.cash_flow th,
-table.report tbody tr.cf_profit_margin th,
-table.report tbody tr.ecfr th,
-table.report tbody tr.cfhpm th
-{
-background:cadetblue;
-}
-
-
-table.report tbody tr.cash_flow td,
-table.report tbody tr.cf_profit_margin td,
-table.report tbody tr.ecfr td,
-table.report tbody tr.cfhpm td
-{
-background:paleturquoise;
-}
-
-
-

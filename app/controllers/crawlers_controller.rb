@@ -14,6 +14,13 @@ class CrawlersController < ApplicationController
   end
 
   def show
+
+    @relation_matrix_hash = if @crawler.pages.blank?
+      nil
+    else
+      @crawler.get_relation_matrix
+    end
+
     respond_to do |format|
       format.html
     end

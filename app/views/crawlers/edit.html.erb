@@ -2,9 +2,11 @@
 
   <frame header="Editing crawler">
   <% semantic_form_for @crawler do |form| %>
-      <%= form.inputs %>
+      <%= form.inputs :name, :root_domain, :root_page %>
       <%= form.buttons %>
   <% end %>
+
+  <%= link_to "Start crawling", new_crawler_crawl_path(@crawler) %>
 
   <%= link_to 'Back', crawlers_path %>
   <%= link_to "Pages", crawler_pages_path(@crawler) %>

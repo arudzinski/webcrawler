@@ -13,11 +13,12 @@ class Crawl
 
   def perform
     if perform_crawl?
-      get_page
-      store_page
-      normalize_links
-      filter_links
-      continue_crawl
+      if get_page
+        store_page
+        normalize_links
+        filter_links
+        continue_crawl
+      end
     else
       puts "Depth limit reached for #{@url}"
     end
@@ -48,12 +49,17 @@ class Crawl
   end
 
   def get_page
-
-    require 'nokogiri'
-    require 'open-uri'
-    @page = Nokogiri::HTML(open(@url))
-    @page_title = (title_container = @page.css('title').first) ? title_container.content : "Title unknown"
-    @links = @page.css("a")
+    begin
+      require 'nokogiri'
+      require 'open-uri'
+      @page = Nokogiri::HTML(open(@url))
+      @page_title = (title_container = @page.css('title').first) ? title_container.content : "Title unknown"
+      @links = @page.css("a")
+      return true
+    rescue => exc
+      puts "====================== Problem with URL #{@url} ====================== "
+      return false
+    end
   end
 
 

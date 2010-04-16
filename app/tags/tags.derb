@@ -31,3 +31,18 @@
     </div>
   </div>
 </def>
+
+<def tag="trr" attrs="id,klass">
+  <tr id="<%= id %>" class="<%= cycle 'odd', 'even' %> <%= klass %>">
+    <td class="lb"></td>
+    <param:content/>
+    <td class="rb">
+      <% if params_present.include?('tools') %>
+          <div>
+            <param:tools/>
+            <span></span>
+          </div>
+      <% end %>
+    </td>
+  </tr>
+</def>

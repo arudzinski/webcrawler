@@ -36,7 +36,11 @@ class Crawler < ActiveRecord::Base
   #-------------------------------------------------------------------
 
   def root_page
-    "http://#{read_attribute(:root_page).gsub('http://', '')}"
+    if root_domain
+      "http://" + "#{root_domain}/#{read_attribute(:root_page)}".gsub('http://', '')
+    else
+      "http://#{read_attribute(:root_page).gsub('http://', '')}"
+    end
   end
 
   def max_depth
@@ -48,8 +52,16 @@ class Crawler < ActiveRecord::Base
     cs = CrawlingStack.new
 
     Crawl.new(self.id, root_page, 0, cs, nil,
-                                   :links_normalizer => {},
-                                   :links_filter => {})
+              :links_normalizer => {},
+              :links_filter => {})
+  end
+
+
+  def get_relation_matrix
+    pages.inject({}) do |result, page|
+      result[page] = page.references
+      result
+    end
   end
 
 end
