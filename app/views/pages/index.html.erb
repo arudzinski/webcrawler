@@ -3,17 +3,16 @@
   <h1>Pages</h1>
   <%= will_paginate @pages %>
   <table class="generic" cellspacing="0" cellpadding="0">
-    <%= table_headers "Id", "Address", "Title", "Number of links", "Crawler", " " %>
+    <%= table_headers "#", "DBId", "Address", "Title", "Number of links", "Crawler", " " %>
     <tbody id="pages_list">
-    <%= render @pages %>
+
+    <% @pages.each_with_index do |page, index| %>
+        <%= render :partial => "page", :locals => {:page => page, :index => index} %>
+    <% end %>
+
     </tbody>
   </table>
   <%= will_paginate @pages %>
-
-
-
-  
-
 
 
 </column-mc:>

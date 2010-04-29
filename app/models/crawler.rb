@@ -1,6 +1,6 @@
 class Crawler < ActiveRecord::Base
   LINKS_LIMIT = 3
-  DEPTH_LIMIT = 5
+  DEPTH_LIMIT = 3
   TOTAL_LINKS = (DEPTH_LIMIT+1)*LINKS_LIMIT
 
 
@@ -48,7 +48,8 @@ class Crawler < ActiveRecord::Base
   end
 
   def crawl
-
+    pages.destroy_all
+    
     cs = CrawlingStack.new
 
     Crawl.new(self.id, root_page, 0, cs, nil,

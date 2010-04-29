@@ -9,6 +9,7 @@
     <li><label>Root domain</label><%= @crawler.root_domain -%></li>
 
   </ul>
+  <%= link_to "Pages", crawler_pages_path(@crawler) %> |
   <%= link_to 'Edit', edit_crawler_path(@crawler) %> |
   <%= link_to 'Back', crawlers_path %>
 
@@ -21,16 +22,16 @@
         <tr>
           <th>\</th>
           <% @pages.each do |page| %>
-              <th colspan="2"><%= page.title %></th>
+              <th colspan="2" title="<%= page.address %>"><%= page.title %></th>
           <% end %>
 
         </tr>
         <% @relation_matrix_hash.each do |page, page_references| %>
             <tr>
-              <th><%= page.title %></th>
+              <th title="<%= page.address %>"><%= page.title %></th>
               <% @pages.each do |relative_page| %>
                   <% if stats = page_references[relative_page.id] %>
-                      <% if !stats[:self_references].zero? and relative_page.id==page.id%>
+                      <% if !stats[:self_references].zero? and relative_page.id==page.id %>
                           <td colspan="2"><%= stats[:self_references] %></td>
                       <% else %>
                           <td>&uarr;<%= stats[:incoming_links] %></td>
@@ -46,6 +47,17 @@
       </table>
       </frame>
   <% end %>
+
+  <frame header="BFS Traversal">
+
+  <ul>
+    <% @bfs_traversal.each do |node| %>
+        <li><%= node %> - <%= node.number_of_links %> links (<%= node.address %>)</li>     
+    <% end %>
+
+  </ul>
+
+  </frame>
 
 
 </column-mc:>

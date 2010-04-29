@@ -6,7 +6,7 @@ class Page < ActiveRecord::Base
   belongs_to :crawler
 
 
-  has_many :page_links, :foreign_key => "source_page_id"
+  has_many :page_links, :foreign_key => "source_page_id", :dependent => :destroy
   has_many :pages, :class_name => "Page", :through => :page_links, :source => :target_page
 
 
@@ -68,4 +68,19 @@ class Page < ActiveRecord::Base
     end
 
   end
+
+  #-------------------------------------------------------------------
+  #-------------------------- { For BFS } ----------------------------
+  #-------------------------------------------------------------------
+
+  def children
+    pages
+  end
+
+  def to_s
+    title
+  end
+
+
+
 end

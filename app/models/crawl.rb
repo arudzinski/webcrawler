@@ -27,10 +27,11 @@ class Crawl
   private
 
   def continue_crawl
-    puts "I am on #{@url} -> I want to navigate to #{@links.map{|l| l['href']}}"
+    puts "I am on #{@url} (#{@links.size} links)-> I want to navigate to #{@links.map{|l| l['href']}}"
 
     @links.each do |link|
       href = link["href"]
+      next if href.blank?
       href = @stored_page.domain + '/' + href unless href.starts_with?("htt")
       if page_found = Page.find_by_address_and_crawler_id(href, @crwlr.id)
         puts "Loop for #{href}"
@@ -55,9 +56,11 @@ class Crawl
       @page = Nokogiri::HTML(open(@url))
       @page_title = (title_container = @page.css('title').first) ? title_container.content : "Title unknown"
       @links = @page.css("a")
+
       return true
     rescue => exc
       puts "====================== Problem with URL #{@url} ====================== "
+      puts "====================== #{exc.message}"
       return false
     end
   end
@@ -76,7 +79,7 @@ class Crawl
   end
 
   def store_page
-    @stored_page = @crwlr.pages.create(:address => @url, :title => @page_title, :number_of_links => @links.size)
+    @stored_page = @crwlr.pages.create(:address => @url, :title => @page_title[0..200], :number_of_links => @links.size)
     if @parent_page
       @parent_page.pages << @stored_page
     end

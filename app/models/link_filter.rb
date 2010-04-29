@@ -11,7 +11,7 @@ class LinkFilter
 
     @options[:no_https] ||= true
     @options[:no_invalid] ||= true
-    @options[:http_only] ||= true
+    @options[:http_only] ||= false
     @options[:no_js] ||= true
     @options[:no_forum] ||= true
     @options[:no_blog] ||= true
@@ -36,11 +36,13 @@ class LinkFilter
 
   def no_https(link, *args)
     return false unless args.first
+    return false if link["href"].blank?
     link["href"].starts_with?('https://')
   end
 
   def http_only(link, *args)
     return false unless args.first
+    return true if link["href"].blank?
     not (link["href"].starts_with?('/') or link["href"].starts_with?('http://'))
   end
 
@@ -51,16 +53,19 @@ class LinkFilter
 
   def no_forum(link, *args)
     return false unless args.first
+    return false if link["href"].blank?
     link["href"].include?("forum")
   end
 
   def no_blog(link, *args)
     return false unless args.first
+    return false if link["href"].blank?
     link["href"].include?("blog")
   end
 
   def not_outside_domains(link, *args)
     return false if args.first.blank?
+    return false if link["href"].blank?
     no_protocol = link["href"].split('//').last
     domain = no_protocol.split(/[?\/]/).first
     not (args.any?{|domain_suffix| domain.ends_with?(domain_suffix)})

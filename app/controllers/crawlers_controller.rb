@@ -21,6 +21,10 @@ class CrawlersController < ApplicationController
       @crawler.get_relation_matrix
     end
 
+
+    bfs = BfsTraverse.new(@crawler.pages.first)
+    @bfs_traversal = bfs.traverse
+
     respond_to do |format|
       format.html
     end
