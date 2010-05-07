@@ -1,13 +1,15 @@
 <column-mc:>
-<%= will_paginate @crawlers %>
-  <table class="generic" cellspacing="0" cellpadding="0">
-      <%= table_headers  "Name", "Root domain", "Root page"," ", " ", " " %>
+  <h1>Crawlers</h1>
+  <%= will_paginate @crawlers %>
 
-      <tbody id="crawlers_list">
-      <%= render @crawlers %>
-      </tbody>
-    </table>
-<%= will_paginate @crawlers %>
+  <table class="generic" cellspacing="0" cellpadding="0">
+    <%= table_headers  "Name", "Root domain", "Root page", " ", " ", " ", " " %>
+
+    <tbody id="crawlers_list">
+    <%= render @crawlers %>
+    </tbody>
+  </table>
+  <%= will_paginate @crawlers %>
 
   <%= link_to "New crawler", new_crawler_path %>
 
