@@ -1,7 +1,7 @@
 <column-mc:>
 <%= will_paginate @crawlers %>
   <table class="generic" cellspacing="0" cellpadding="0">
-      <%= table_headers "Id", "Name", "Root domain", "Root page", "Start time", "Finish time", " ", " ", " " %>
+      <%= table_headers  "Name", "Root domain", "Root page"," ", " ", " " %>
 
       <tbody id="crawlers_list">
       <%= render @crawlers %>

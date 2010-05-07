@@ -1,7 +1,7 @@
+#Jedno zdanie wyjąśniające do czego służy klasa.
 class Crawl
 
   def initialize(crawler_id, url, depth, cs, parent_page_id=nil, *args)
-
     @options = args.extract_options!
     @normalizer = false
     @filter = false
