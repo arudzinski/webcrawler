@@ -30,14 +30,14 @@
             <tr>
               <th title="<%= page.address %>"><%= page.title %></th>
               <% @pages.each do |relative_page| %>
-                  <% if stats = page_references[relative_page.id] %>
+                  <% if (stats = page_references[relative_page.id]) and (not stats.values.sum.zero?)  %>
+
                       <% if !stats[:self_references].zero? and relative_page.id==page.id %>
                           <td colspan="2"><%= stats[:self_references] %></td>
                       <% else %>
                           <td>&uarr;<%= stats[:incoming_links] %></td>
                           <td>&larr;<%= stats[:outgoing_links] %></td>
                       <% end %>
-
                   <% else %>
                       <td colspan="2"></td>
                   <% end %>
@@ -52,7 +52,7 @@
 
   <ul>
     <% @bfs_traversal.each do |node| %>
-        <li><%= node %> - <%= node.number_of_links %> links (<%= node.address %>)</li>     
+        <li><%= node %> - <%= node.number_of_links %> links (<%= node.address %>)</li>
     <% end %>
 
   </ul>

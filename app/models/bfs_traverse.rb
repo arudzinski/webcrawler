@@ -30,10 +30,7 @@ class BfsTraverse
     return result
   end
 
-
-
 end
-
 
 
 class BfsQueue < Array

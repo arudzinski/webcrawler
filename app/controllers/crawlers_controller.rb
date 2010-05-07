@@ -54,7 +54,7 @@ class CrawlersController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {redirect_to crawlers_path}
+      format.html {redirect_to edit_crawler_path(@crawler)}
     end
   end
 

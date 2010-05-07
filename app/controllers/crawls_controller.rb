@@ -5,7 +5,7 @@ class CrawlsController < ApplicationController
       @crawler.crawl
     end
 
-    redirect_to crawler_pages_path(@crawler)
+    redirect_to crawler_path(@crawler)
   end
 
 
