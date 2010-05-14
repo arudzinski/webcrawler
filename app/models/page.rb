@@ -1,48 +1,28 @@
+
+#klasa reprezentujaca strone (wierzcholek grafu)
 class Page < ActiveRecord::Base
 
-  # accessors
+  belongs_to :crawler #zwraca obiekt crawlera, w ramach ktorego zostala stworzona dana strona
+  has_many :page_links, :foreign_key => "source_page_id", :dependent => :destroy #zwraca obiekt relacji (tozsamy z tablica) zawierajacy wszystkie polaczenia (linki) wychodzace z danej strony
+  has_many :pages, :class_name => "Page", :through => :page_links, :source => :target_page#zwraca obiekt relacji (tozsamy z tablica) zawierajacy wszystkie strony powiazane z obecna strona za pomoca page_links
 
-  # relations
-  belongs_to :crawler
-
-
-  has_many :page_links, :foreign_key => "source_page_id", :dependent => :destroy
-  has_many :pages, :class_name => "Page", :through => :page_links, :source => :target_page
-
-
-  # callbacks
-
-  # named_scopes
-
-  # validations
-  # validates_presence_of
-  # validates_uniqueness_of
-  # validates_numeracility_of
 
   attr_accessible :address, :title, :number_of_links
 
-
-  private
-
   public
 
-  #-------------------------------------------------------------------
-  #------------------------ { CLASS METHODS } ------------------------
-  #-------------------------------------------------------------------
-
-  class << self
-
-  end
 
   #-------------------------------------------------------------------
   #---------------------- { INSTANCE METHODS } -----------------------
   #-------------------------------------------------------------------
 
+  #zwraca nazwę domeny wraz z protokolem na podstawie sowjego adresu
   def domain
     protocol, domain = address.split('//')
     [protocol, domain.split('/')[0..-2].join('/')].join('//')
   end
 
+  #zwraca tablicę haszującą (asocjacyjną) zawierająca identyfikatory stron powiazanych z dana strona jako kluczee, oraz ilosci kolejno - zwrotnych, wychodzacych i przychodzacych linkow dla danej strony jako wartosci
   def references
     source_page_links = PageLink.find_all_by_source_page_id(id)
     target_page_links = PageLink.find_all_by_target_page_id(id)
@@ -61,9 +41,6 @@ class Page < ActiveRecord::Base
               :incoming_links => unified_all_page_links.select{|pl| (pl.source_page_id == self.id) and (pl.target_page_id == page.id) }.size
       }
 
-#      throw Page.find(relative_page_ids).size if self.id == 86
-#      throw all_page_links.map{|x| "#{x.source_page_id}->#{x.target_page_id}"}.join(' ||| ') if self.id == 86
-
       page_references
     end
 
@@ -73,10 +50,13 @@ class Page < ActiveRecord::Base
   #-------------------------- { For BFS } ----------------------------
   #-------------------------------------------------------------------
 
+
+  #metoda wymagan przez klase BFS - jest aliasem dla metody pages
   def children
     pages
   end
 
+  #metoda wymagana przez klase BFS - jest aliasem dla metody title
   def to_s
     title
   end

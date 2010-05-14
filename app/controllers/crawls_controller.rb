@@ -1,3 +1,4 @@
+#klasa Kontrolera crawlingów - zapewnia obsuge komunikacji pomiedzy GUI a logiką biznesową modelu Crawl
 class CrawlsController < ApplicationController
 
   def new

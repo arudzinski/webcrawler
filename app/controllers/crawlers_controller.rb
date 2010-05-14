@@ -1,3 +1,4 @@
+#klasa Kontrolera crawlerow - zapewnia obsuge komunikacji pomiedzy GUI a logiką biznesową modelu Crawler
 class CrawlersController < ApplicationController
 
   before_filter :get_crawlers, :only => [:index]

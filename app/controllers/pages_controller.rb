@@ -1,3 +1,4 @@
+#klasa Kontrolera stron - zapewnia obsuge komunikacji pomiedzy GUI a logiką biznesową modelu Page
 class PagesController < ApplicationController
   include ParamsToConditions
 

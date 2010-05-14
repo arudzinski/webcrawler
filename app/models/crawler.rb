@@ -1,40 +1,19 @@
 class Crawler < ActiveRecord::Base
   LINKS_LIMIT = 3
   DEPTH_LIMIT = 3
-  TOTAL_LINKS = (DEPTH_LIMIT+1)*LINKS_LIMIT
-
-
-  # accessors
 
   # relations
-  has_many :pages
-
-  # callbacks
-
-  # named_scopes                                                                                                                                                              a
-  # validations
-  # validates_presence_of
-  # validates_uniqueness_of
-  # validates_numeracility_of
+  has_many :pages   #zwraca obiekt relacji (tozsamy z tablica) zawierajacy wszystkie strony stworzone za pomoca tego crawlera
 
   attr_accessible :name, :root_domain, :root_page
 
-  private
-
   public
-
-  #-------------------------------------------------------------------
-  #------------------------ { CLASS METHODS } ------------------------
-  #-------------------------------------------------------------------
-
-  class << self
-
-  end
 
   #-------------------------------------------------------------------
   #---------------------- { INSTANCE METHODS } -----------------------
   #-------------------------------------------------------------------
 
+  #zwraca adres url strony startowej na podstawie domeny i nazwy podstrony
   def root_page
     if root_domain
       "http://" + "#{root_domain}/#{read_attribute(:root_page)}".gsub('http://', '')
@@ -43,10 +22,7 @@ class Crawler < ActiveRecord::Base
     end
   end
 
-  def max_depth
-    6
-  end
-
+  #Usuwa wszystkie strony znalezione podczas poprzedniego procesu crwalingu oraz Inicjalizuje nowy proces crawlingu stron.
   def crawl
     pages.destroy_all
     
@@ -57,7 +33,7 @@ class Crawler < ActiveRecord::Base
               :links_filter => {})
   end
 
-
+   #zwraca tablicę haszującą (asocjacyjną) zawierająca obiekty stron jako kluczee oraz tablice haszujace zawierajace informacje o relacjach wzgledem danej strony jako wartosci 
   def get_relation_matrix
     pages.inject({}) do |result, page|
       result[page] = page.references
