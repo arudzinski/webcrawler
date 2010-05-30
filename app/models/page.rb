@@ -6,7 +6,7 @@ class Page < ActiveRecord::Base
   has_many :page_links, :foreign_key => "source_page_id", :dependent => :destroy #zwraca obiekt relacji (tozsamy z tablica) zawierajacy wszystkie polaczenia (linki) wychodzace z danej strony
   has_many :pages, :class_name => "Page", :through => :page_links, :source => :target_page#zwraca obiekt relacji (tozsamy z tablica) zawierajacy wszystkie strony powiazane z obecna strona za pomoca page_links
 
-
+  has_many :incoming_links, :foreign_key => "target_page_id", :class_name => "PageLink"
   attr_accessible :address, :title, :number_of_links
 
   public

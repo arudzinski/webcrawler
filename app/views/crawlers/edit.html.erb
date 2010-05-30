@@ -5,9 +5,12 @@
       <%= form.inputs :name, :root_domain, :root_page %>
       <%= form.buttons %>
   <% end %>
-
-  <%= link_to "Start crawling", new_crawler_crawl_path(@crawler) %>
+        <div style='clear:both'>
+   <%= link_to "Start crawling", new_crawler_crawl_path(@crawler) %>
   <%= link_to 'Back', crawlers_path %>
+  </div>
+  <br/>
+
   </frame>
 
 </column-mc:>

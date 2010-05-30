@@ -25,13 +25,21 @@ class Crawler < ActiveRecord::Base
   #Usuwa wszystkie strony znalezione podczas poprzedniego procesu crwalingu oraz Inicjalizuje nowy proces crawlingu stron.
   def crawl
     pages.destroy_all
-    
+      self.update_attribute(:start_time, Time.now)
     cs = CrawlingStack.new
 
     Crawl.new(self.id, root_page, 0, cs, nil,
               :links_normalizer => {},
               :links_filter => {})
+     self.update_attribute(:finish_time, Time.now)
   end
+
+
+  def finish_time
+    read_attribute(:finish_time) or (update_attribute(:finish_time, Time.now) and  finish_time)
+  end
+
+
 
    #zwraca tablicę haszującą (asocjacyjną) zawierająca obiekty stron jako kluczee oraz tablice haszujace zawierajace informacje o relacjach wzgledem danej strony jako wartosci 
   def get_relation_matrix

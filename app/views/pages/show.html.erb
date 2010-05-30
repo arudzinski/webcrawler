@@ -1,18 +1,21 @@
 <column-mc:>
   <frame header="Page details">
-  <ul>
+  <ul id="crawler_details">
+
     <li><label>Id</label><%= @page.id -%></li>
     <li><label>Address</label><%= @page.address -%></li>
     <li><label>Title</label><%= @page.title -%></li>
     <li><label>Number of links</label><%= @page.number_of_links -%></li>
     <li><label>Crawler</label><%= @page.crawler_id -%></li>
   </ul>
-  <%= link_to 'Back', pages_path %>
+  </ul>
+  <br/>
+
+  <div style='clear:both'>
+    <%= link_to 'Back', pages_path %>
+  </div>
+  <br/>
   </frame>
 
 
 </column-mc:>
-
-
-
-
