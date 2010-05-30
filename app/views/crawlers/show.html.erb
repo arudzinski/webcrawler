@@ -62,13 +62,18 @@
 
   </frame>
 
+
+  <% if @crawler.pages.present? %>
   <frame header="BFS">
   <ul>
+
     <% @bfs_traversal.each do |node| %>
         <li><%= node %> - <%= node.number_of_links %> links (<%= node.address %>)</li>
     <% end %>
   </ul>
   </frame>
+
+      <% end %>
 
 
 </column-mc:>
