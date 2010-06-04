@@ -15,10 +15,10 @@
     <%= link_to 'Edit', edit_crawler_path(@crawler) %>
     <%= link_to 'Back', crawlers_path %>
   </div>
-  <br/> 
+  <br/>
   </frame>
 
-  <% if false #  @relation_matrix_hash   %>
+  <% if false #  @relation_matrix_hash    %>
       <% @pages = @relation_matrix_hash.keys %>
       <frame header="Relation Matrix">
       <div id="rel_mtrx">
@@ -56,7 +56,14 @@
   <frame header="Lista sąsiedztwa">
   <ul id="neighbours_list">
     <% @crawler.pages && @crawler.pages.each do |p| %>
-        <li><%= [p, p.pages].flatten.compact.map { |page| content_tag(:span, "#{page.address} (#{page.incoming_links.count})", :title => page.title) }.join(" &rarr; ") %></li>
+
+        <% content_tag(:li, :title => p.title) do %>
+            <%= "#{p.address} (#{p.incoming_links.count}) (węzeł główny)" %>
+            <div>Sąsiedzi:</div>
+            <ul>
+              <%= p.pages.map { |page| content_tag(:li, "#{page.address} (#{page.incoming_links.count})", :title => page.title) } %>
+            </ul>
+        <% end %>
     <% end %>
   </ul>
 
@@ -64,16 +71,16 @@
 
 
   <% if @crawler.pages.present? %>
-  <frame header="BFS">
-  <ul>
+      <frame header="BFS">
+      <ul>
 
-    <% @bfs_traversal.each do |node| %>
-        <li><%= node %> - <%= node.number_of_links %> links (<%= node.address %>)</li>
-    <% end %>
-  </ul>
-  </frame>
+        <% @bfs_traversal.each do |node| %>
+            <li><%= node %> - <%= node.number_of_links %> links (<%= node.address %>)</li>
+        <% end %>
+      </ul>
+      </frame>
 
-      <% end %>
+  <% end %>
 
 
 </column-mc:>

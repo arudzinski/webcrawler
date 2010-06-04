@@ -29,7 +29,7 @@ class BfsTraverse
     while not @queue.empty?
       node = @queue.dequeue
         return @result unless node
-      puts "Visiting node: #{node}"
+    #  puts "Visiting node: #{node}"
       return node if (@search and node==@search)
       node && node.children.each do |node|
         unless @result.include?(node)

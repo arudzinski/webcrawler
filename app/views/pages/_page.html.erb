@@ -1,7 +1,7 @@
 <trr id="#{dom_id(page)}">
   <td><b><%= index + 1 %></b></td>
   <td><%= page.id -%></td>
-  <td><%= page.address -%></td>
+  <td class="regular_link"><%= link_to page.address, page.address, :target => "_blank" -%></td>
   <td><%= page.title -%></td>
   <td><%= page.number_of_links -%></td>
   <td><%= page.crawler_id -%></td>

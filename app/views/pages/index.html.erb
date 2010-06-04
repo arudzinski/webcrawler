@@ -1,6 +1,8 @@
 <column-mc:>
 
-  <h1>Pages</h1>
+  <div style="width:100%">
+  <h1>Pages (<%= @pages_count %>)</h1>
+    </div>      <br/> <br/> <br/>
   <%= will_paginate @pages %>
   <table class="generic" cellspacing="0" cellpadding="0">
     <%= table_headers "#", "DBId", "Address", "Title", "Number of links", "Crawler", " " %>

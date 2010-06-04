@@ -24,6 +24,8 @@ class PagesController < ApplicationController
   end
 
   def get_pages
+
     @pages = Page.find(:all, :conditions => get_conditions_from_params(:crawler_id)).paginate(:page => params[:page], :per_page => 10)
+     @pages_count =   Page.count(:all, :conditions => get_conditions_from_params(:crawler_id))
   end
 end

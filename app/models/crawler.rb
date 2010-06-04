@@ -1,6 +1,5 @@
 class Crawler < ActiveRecord::Base
-  LINKS_LIMIT = 3
-  DEPTH_LIMIT = 3
+  DEPTH_LIMIT = 8
 
   # relations
   has_many :pages   #zwraca obiekt relacji (tozsamy z tablica) zawierajacy wszystkie strony stworzone za pomoca tego crawlera

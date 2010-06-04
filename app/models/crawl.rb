@@ -9,10 +9,10 @@ class Crawl
   #cs - obiekt stosu w ktorym przchowywane sa pozostale do odwiedzenia adresy url
   #parent_page_id - identyfikator strony, ktora zainicjalizowala dany proces
   #Konstruktor automatycznie uruchamia metode perform na obiekcie
-  def initialize(crawler_id, url, depth, cs, parent_page_id=nil, *args)
+  def initialize(crawler_id, url, depth, cs, parent_page_id=nil, * args)
     @options = args.extract_options! #hash
     @normalizer = false #boolean
-    @filter = false             #boolean
+    @filter = false #boolean
     @crwlr = ::Crawler.find(crawler_id) #Crawler
     @stack = cs #CrawlingStack
     @url, @depth, @parent_page =  url, depth, ::Page.find_by_id(parent_page_id) #strong, integer, Page
@@ -29,7 +29,7 @@ class Crawl
         continue_crawl
       end
     else
-      puts "Depth limit reached for #{@url}"
+      # puts "Depth limit reached for #{@url}"
     end
   end
 
@@ -39,19 +39,22 @@ class Crawl
   # W tym wypadku tworzone jest jedynie dodatkowe polaczenie uzupelniajace zbudowana dotychczas topologie.
   #W przeciwnym wypadku, tworzony jest nowy obiekt crawlingu dla striny do ktorej kieruje dany link
   def continue_crawl
-    puts "I am on #{@url} (#{@links.size} links)-> I want to navigate to #{@links.map{|l| l['href']}}"   #links - Array
+    # puts "I am on #{@url} (#{@links.size} links)-> I want to navigate to #{@links.map{|l| l['href']}}"   #links - Array
 
-    @links.each do |link|
+    @links.each_with_index do |link, i|
       href = link["href"]
-      next if href.blank?
-      href = @stored_page.domain + '/' + href unless href.starts_with?("htt")
+      next if href.blank? or (href.split('/').last && href.split('/').last.starts_with?("#"))
+      if not href.starts_with?("htt")
+        href = href[1..-1] if href.starts_with?('/')
+        href = @stored_page.domain + '/' + href
+      end
       if page_found = Page.find_by_address_and_crawler_id(href, @crwlr.id)
-        puts "Loop for #{href}"
-        if @stored_page     #Page
+        #puts "Loop for #{href}"
+        if @stored_page #Page
           @stored_page.pages << page_found
         end
       else
-        puts "Adding job for CID: #{@crwlr.id} HREF: #{href} SPID: #{@stored_page.id} #{} #{} #{}"
+        #puts "Adding job for CID: #{@crwlr.id} HREF: #{href} SPID: #{@stored_page.id} #{} #{} #{}"
         @stack.enqueue Crawl.new(@crwlr.id, href, @depth+1, @stack, @stored_page.id, @options)
       end
     end
@@ -59,12 +62,13 @@ class Crawl
 
   #zwraca truem jesli glebokosc w strukturze linkow na jakiej pracuje crawler nie przekracza wartosci maksymlanej okreslonej przez stala DEPTH_LIMIT
   def perform_crawl?
-    @depth < Crawler::DEPTH_LIMIT
+    @depth <= Crawler::DEPTH_LIMIT
   end
 
   #pobiera strone z danego adresu url, parsuje ja, zapisuje jej tytul w zmiennej instancji page_title oraz zapisuje liste odnalezionych na niej linkow w zmiennej instancji links
   def get_page
     begin
+      puts "@@@@@@@@@@@@@ Visiting: #{@url} from #{@parent_page.address if @parent_page.present?}"
       require 'nokogiri'
       require 'open-uri'
       @page = Nokogiri::HTML(open(@url))
@@ -73,8 +77,7 @@ class Crawl
 
       return true
     rescue => exc
-      puts "====================== Problem with URL #{@url} ====================== "
-      puts "====================== #{exc.message}"
+      puts "==Problem with URL #{@url} == #{ exc.message}"
       return false
     end
   end
